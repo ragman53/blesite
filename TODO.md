@@ -23,6 +23,7 @@
 - [ ] **P0-S7** Write stub `lib.rs` with `get_version() -> String` FRB export
 - [ ] **P0-S8** Run `flutter_rust_bridge_codegen generate` → verify `frb_generated.dart` is created
 - [ ] **P0-S9** `flutter run` on physical device → stub app launches without crash
+- [ ] **P0-S10** Generate production GATT Service UUID via `uuidgen` (replace `12345678-...` placeholder) — define as `SERVICE_UUID` const in `rust/src/constants.rs`, export via FRB, reference from Dart scanner/server/advertiser
 
 ### Android Baseline
 - [ ] **P0-A1** Write `AndroidManifest.xml`: BLUETOOTH_SCAN (`neverForLocation`), BLUETOOTH_CONNECT, BLUETOOTH_ADVERTISE, FOREGROUND_SERVICE, FOREGROUND_SERVICE_CONNECTED_DEVICE
@@ -306,12 +307,13 @@
 
 ## Task Count Summary
 
-| Phase | Tasks | Priority |
-|-------|-------|----------|
-| Phase 0: Toolchain | 20 | 🔴 Blocking |
-| Phase 1: Rust Core | 56 | 🔴 Blocking |
-| Phase 2: BLE Layer | 29 | 🟠 Core |
-| Phase 3: Flutter UI | 34 | 🟠 Core |
-| Phase 4: Integration | 21 | 🟡 Quality |
-| Post-MVP Backlog | 8 | 🟢 Future |
-| **Total** | **168** | |
+| Phase | Sub-groups | Tasks | Priority |
+|-------|-----------|-------|----------|
+| Phase 0: Toolchain | Environment (4) · Scaffold (10) · Android (8) · CI (3) | **25** | 🔴 Blocking |
+| Phase 1: Rust Core | Adv (10) · Types (8) · Crypto (11) · Reassembler (10) · Validator (11) · Vitality (8) · Index (11) · Emulator (5) | **74** | 🔴 Blocking |
+| Phase 2: BLE Layer | Scanner (6) · GATT Client (11) · GATT Server (7) · Advertiser (5) · Foreground Service (7) · Power (3) | **39** | 🟠 Core |
+| Phase 3: Flutter UI | Providers (4) · Radar (8) · Viewer (7) · HostEditor (10) · HtmlValidator (6) | **35** | 🟠 Core |
+| Phase 4: Integration | ErrorHandling (4) · EdgeCases (5) · Security (5) · E2E (5) · CodeQuality (6) | **25** | 🟡 Quality |
+| Post-MVP Backlog | Out-of-scope items | **8** | 🟢 Future |
+| **Total (MVP + Backlog)** | | **206** | |
+| **MVP only (Phase 0–4)** | | **198** | |

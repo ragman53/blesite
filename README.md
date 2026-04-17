@@ -60,7 +60,7 @@ Missing any chunk? Silent discard. *「縁がなかった」*
 |------|-------------|
 | [`SPEC.md`](SPEC.md) | Full technical specification (protocol, data structures, security) |
 | [`PLAN.md`](PLAN.md) | 5-phase development strategy with milestones |
-| [`TODO.md`](TODO.md) | 168 atomic task units across all phases |
+| [`TODO.md`](TODO.md) | 198 atomic task units (MVP) + 8 post-MVP items |
 
 ## 🚀 Getting Started
 
@@ -99,9 +99,12 @@ flutter run
 | Name | Vibe |
 |------|------|
 | **BLEsite** | Direct, descriptive (current working title) |
-| **Ripple** | Wave propagation |
-| **PassBy** | Surrender communication |
+| **Ripple** | Wave propagation metaphor |
+| **PassBy** | "Surrender communication" |
+| **HereOnly** | Location-bound emphasis |
 | **Keshiki** 景色 | Ephemeral scenery |
+
+> See [`SPEC.md`](SPEC.md#appendix-a-name-candidates) Appendix A for rationale.
 
 ## 📄 License
 

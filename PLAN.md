@@ -104,7 +104,7 @@ cargo init rust --lib
 - `upsert_from_adv(pkt: &AdvPacket, rssi: i16, now_ms: u64)`
 - `get_all_entries() -> Vec<IndexEntry>` (sorted by vitality desc)
 - `set_content(site_id: SiteID, content: Vec<u8>)`
-- `start_decay_scheduler(tx: mpsc::Sender<IndexEvent>)` — async Tokio task
+- `start_decay_scheduler(index: Arc<EphemeralIndex>, tx: mpsc::Sender<IndexEvent>)` — async Tokio task (30s interval; see SPEC §4.2)
 - FRB exports: `get_index_snapshot() -> Vec<IndexEntryDto>`, `mark_content_fetched(site_id, content)`
 
 ### 1.8 BLE Emulator Mock (`mock/ble_emulator.rs`)
@@ -146,8 +146,8 @@ connect(device) → discoverServices()
 - Log errors (debug) but never show per-failure UI to the user
 
 ### 2.3 GATT Server / Host Mode
-> **Note**: `flutter_blue_plus` supports GATT server on Android. Implement host-side here.
-- Register GATT service UUID `12345678-...`
+> **⚠️ Compatibility Check Required**: `flutter_blue_plus` の GATT peripheral (server) API は Android 限定で、バージョンによって API が変わっています。**Phase 2 着手時に最新版で `addService` / `onCharacteristicReadRequest` / `notifyValue` の 3 点が揃っていることを確認すること**。欠落時の代替策として、Kotlin 側に `BluetoothGattServer` を直接実装し `MethodChannel` で Flutter と橋渡しする方針 (Risk Register も参照)。
+- Register GATT service UUID `12345678-...` (TODO: 本番 UUID は `uuidgen` で再発行)
 - Characteristic FFF1: Read → return serialized `SiteManifest` (postcard)
 - Characteristic FFF2: Write (receive `RequestAll`) → start burst notification loop
 - Characteristic FFF3: Read → return `last_updated_ms` as LE u64
@@ -247,7 +247,7 @@ class HostSiteNotifier extends StateNotifier<HostSiteState?> { ... }
 ### 4.3 E2E Bicycle Simulation Test
 - Two devices on bicycle handles, 15km/h pass-by at 10m closest approach
 - Record: did transfer start? did it complete? render time?
-- Target: ≥9/10 successful renders in 20 trials
+- Target: **≥18 successful renders in 20 trials** (90% success rate)
 
 ### 4.4 Battery Profiling Session
 - Host mode, screen off, 1 hour
@@ -266,7 +266,7 @@ class HostSiteNotifier extends StateNotifier<HostSiteState?> { ... }
 - `flutter pub publish --dry-run` equivalent check
 
 **Phase 4 Exit Criteria**:
-- [ ] Bicycle simulation: ≥9/10 successful transfers
+- [ ] Bicycle simulation: ≥18/20 successful transfers (90%)
 - [ ] Battery: ≤50mA measured
 - [ ] Security checklist: all items pass
 - [ ] Zero `cargo clippy` warnings
