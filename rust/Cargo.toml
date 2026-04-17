@@ -1,0 +1,33 @@
+[package]
+name = "blesite_core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+flutter_rust_bridge = "=2.12.0"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+postcard = { version = "1", features = ["alloc"] }
+
+# Cryptography
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+rand = "0.8"
+
+# Compression
+lz4_flex = "0.11"
+
+# Async runtime
+tokio = { version = "1", features = ["rt", "time", "sync", "macros"] }
+
+# Bloom filter (dedup)
+bloomfilter = "1"
+
+# CRC checksum
+crc = "3"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(frb_expand)'] }

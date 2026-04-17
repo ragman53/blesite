@@ -1,8 +1,7 @@
 # BLEsite 📡
 
-> **Ephemeral BLE Local Web Platform** — *codename: LocalRipple*
+> **Ephemeral BLE Local Web Platform** — * BLEsite *
 
-「情報が、そこに居た者だけが持ち帰れる『体験の痕跡』である」
 
 BLEsite lets you broadcast tiny websites (≤12KB HTML/SVG) over Bluetooth Low Energy.  
 Nearby devices pick them up passively. No internet. No servers. No links to share.  

@@ -1,7 +1,6 @@
 # SPEC.md: Ephemeral BLE Local Web Platform
 
-> **App Name**: **BLEsite**  
-> **Codename**: LocalRipple  
+> **App Name**: **BLEsite** 
 > **Version**: 0.1.0  
 > **Stack**: Flutter (Dart) + Rust (via `flutter_rust_bridge v2`)  
 > **Target**: Android-first (minSdk 31), Post-MVP: iOS/Desktop  

@@ -70,12 +70,11 @@ rust/target/
 **/*.rs.bk
 # Cargo.lock is intentionally tracked (app project — reproducible builds)
 
-# flutter_rust_bridge generated files (regenerate with codegen)
-lib/rust_bridge/frb_generated.dart
-lib/rust_bridge/frb_generated.io.dart
-lib/rust_bridge/frb_generated.web.dart
-rust/src/frb_generated.rs
-rust/src/frb_generated.io.rs
+# flutter_rust_bridge: frb_generated.* files ARE committed (tracked)
+# cargokit build artifacts (not committed)
+rust_builder/cargokit/build_tool/.dart_tool/
+rust_builder/cargokit/build_tool/build/
+rust_builder/cargokit/build_tool/.packages
 
 # Secrets / keys (never commit)
 *.pem
